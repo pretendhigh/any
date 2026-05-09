@@ -14,6 +14,7 @@ Thumbs.db
 
 # Codex/local generation scratch space
 .codex/
+CONTEXT.md
 generated_images/
 run-any/
 tmp/

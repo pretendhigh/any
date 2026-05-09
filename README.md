@@ -43,15 +43,20 @@
 
 ## Install
 
-Install with `codex-pets`:
+Method 1: install with `codex-pets`:
 
 ```bash
 npx codex-pets add any
 ```
 
-Then restart or refresh Codex if the pet list is already open.
+Method 2: install manually by copying the package folder:
 
-The package files are also available in `any/` for manual installation or inspection.
+```bash
+mkdir -p ~/.codex/pets/any
+cp any/pet.json any/spritesheet.webp ~/.codex/pets/any/
+```
+
+Then restart or refresh Codex if the pet list is already open.
 
 ## Reuse This Workflow
 
