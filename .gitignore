@@ -1,0 +1,24 @@
+# Local OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+
+# Codex/local generation scratch space
+.codex/
+generated_images/
+run-any/
+tmp/
+*.log
+
+# Large/intermediate QA sources that are not needed for the package
+qa/spritesheet*.png
+qa/generated-row-sources.*

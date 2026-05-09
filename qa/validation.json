@@ -1,0 +1,53 @@
+{
+  "dimensions": [
+    1536,
+    1872
+  ],
+  "cell": [
+    192,
+    208
+  ],
+  "grid": [
+    8,
+    9
+  ],
+  "unused_cells_transparent": true,
+  "rows": [
+    {
+      "state": "idle",
+      "used_columns": 6
+    },
+    {
+      "state": "running-right",
+      "used_columns": 8
+    },
+    {
+      "state": "running-left",
+      "used_columns": 8
+    },
+    {
+      "state": "waving",
+      "used_columns": 4
+    },
+    {
+      "state": "jumping",
+      "used_columns": 5
+    },
+    {
+      "state": "failed",
+      "used_columns": 8
+    },
+    {
+      "state": "waiting",
+      "used_columns": 6
+    },
+    {
+      "state": "running",
+      "used_columns": 6
+    },
+    {
+      "state": "review",
+      "used_columns": 6
+    }
+  ]
+}
