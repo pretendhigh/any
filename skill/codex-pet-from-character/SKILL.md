@@ -53,9 +53,9 @@ If the user customizes any row, keep the same row order and frame counts unless 
 
 1. **Extract the concept.** Determine `pet-id`, display name, description, identity traits, style overrides, row overrides, and install target. If unclear and not risky, choose sensible defaults.
 2. **Generate a base sprite.** Use the reference image as identity grounding. Create one centered full-body sprite on flat chroma-key background. Preserve core identity: hair, face, outfit, ears/tail/accessories, palette, and personality.
-3. **Generate full row strips.** Generate each animation row as complete pose sequences, grounded by the base sprite and original reference. Do not puppet a static sprite with locally hand-drawn limbs; that produces broken knees and disjoint anatomy.
-4. **Inspect before recording.** Reject rows with broken joints, pasted stick legs, disconnected hands, giant props, floating magnifiers, unreadable text, grid lines, shadows, speed lines, detached symbols, or identity drift.
-5. **Extract and compose.** Extract frames into `192x208` cells, compose the 8x9 atlas, ensure unused cells are transparent.
+3. **Generate every visual frame with image2.** Do not use scripts, Pillow, canvas, SVG, or local drawing code to create character art. Directly use the image2/image generation tool to generate one frame at a time, grounded by the base sprite and original reference, then assemble those generated frames into animated GIF previews and the final atlas. Row strips are acceptable only as a fallback when the image tool cannot produce individual frames; still reject any locally drawn character pixels.
+4. **Inspect before recording.** Reject frames with broken joints, pasted stick legs, disconnected hands, giant props, floating magnifiers, unreadable text, grid lines, shadows, speed lines, detached symbols, or identity drift.
+5. **Extract and compose.** Use deterministic scripts only for non-creative post-processing: background removal, cropping, resizing, centering frames into `192x208` cells, composing the 8x9 atlas, creating GIF/contact-sheet QA previews, and validating transparent unused cells.
 6. **QA visually.** Create a contact sheet and per-row GIFs. Check that actions are recognizable at pet size and loops are coherent.
 7. **Install or package.** Save the package in the workspace and, when appropriate, copy it to `${CODEX_HOME:-$HOME/.codex}/pets/<pet-id>/`.
 
@@ -65,12 +65,14 @@ If a dedicated `hatch-pet` or equivalent Codex pet tooling is available, prefer 
 
 Every row prompt should include:
 - "same character as the base sprite"
-- exact frame count and row layout
+- the exact single-frame pose or the exact frame index within the action
 - flat chroma-key background
 - no text, labels, grid, scenery, shadows, speed lines, detached effects
 - whole-body sprite centered in each invisible slot
 - identity lock: same face, hair, outfit, palette, proportions, outline style
 - row-specific motion with natural body mechanics
+
+Prefer one prompt per frame. When generating a row, describe the frame as `frame N of M` and the adjacent motion context so each frame animates coherently after assembly.
 
 For walking/running rows, explicitly require bent knees, alternating feet, arm swing, tail counter-sway, and coherent side-view body motion.
 
@@ -90,3 +92,5 @@ Do not call the pet finished until:
 ## Common Failure
 
 Bad shortcut: taking one static front-facing sprite and drawing new legs/arms over it locally. This creates broken knees, disconnected hands, and ugly GIFs. Prefer full-pose row generation, then deterministic extraction and packaging only.
+
+Worse shortcut: using a local script to draw the pet character or synthesize sprite frames. Do not do this. Generate the character images frame by frame with image2/image generation, then use scripts only to package the generated frames.
